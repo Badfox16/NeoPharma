@@ -1,33 +1,33 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="dao.UsuarioDAO" %>
-<%@ page import="model.Usuario" %>
+<%@ page import="dao.ProdutoDAO" %>
+<%@ page import="model.Produto" %>
 <%@ page import="java.io.IOException" %>
 
 <%
-    // Obtém o ID do usuário da URL
-    String idUsuario = request.getParameter("idUsuario");
-    Usuario usuario = null;
+    // Obtém o ID do produto da URL
+    String idProduto = request.getParameter("idProduto");
+    Produto produto = null;
 
-    if (idUsuario != null) {
+    if (idProduto != null) {
         try {
-            int id = Integer.parseInt(idUsuario);
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuario = usuarioDAO.read(id);  // Carrega os dados do usuário
+            int id = Integer.parseInt(idProduto);
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            produto = produtoDAO.read(id);  // Carrega os dados do produto
         } catch (NumberFormatException e) {
-            out.println("<p>Erro: ID do Usuário inválido.</p>");
+            out.println("<p>Erro: ID do Produto inválido.</p>");
         }
     }
 
-    // Atualiza os dados do usuário
+    // Atualiza os dados do produto
     if ("POST".equalsIgnoreCase(request.getMethod())) {
-        if (usuario != null) {
-            usuario.setNome(request.getParameter("Nome"));
-            usuario.setEmail(request.getParameter("Email"));
-            usuario.setSenha(request.getParameter("Senha"));
-            usuario.setTipo(request.getParameter("Tipo"));
+        if (produto != null) {
+            produto.setNome(request.getParameter("Nome"));
+            produto.setDescricao(request.getParameter("Descricao"));
+            produto.setPreco(Double.parseDouble(request.getParameter("Preco")));
+            produto.setEstoque(Integer.parseInt(request.getParameter("Estoque")));
 
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.update(usuario);
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            produtoDAO.update(produto);
 
             response.sendRedirect("index.jsp");
             return;
@@ -42,26 +42,26 @@
         <section class="d-flex">
             <%@ include file="../includes/sidebar.jsp" %>
             <div class="card-body" style="width: calc(100% - 290px); margin-left: 290px; overflow-y: scroll;">
-                <h2 class="pd-2 m-5" style="color: #344e41;"><b>Editar Usuário</b></h2>
+                <h2 class="pd-2 m-5" style="color: #344e41;"><b>Editar Produto</b></h2>
 
                 <!-- Formulário de edição -->
                 <div class="m-5">
-                    <form method="post" action="edit.jsp?idUsuario=<%= idUsuario%>">
+                    <form method="post" action="edit.jsp?idProduto=<%= idProduto%>">
                         <div class="form-group">
                             <label for="Nome">Nome:</label>
-                            <input type="text" class="form-control" id="Nome" name="Nome" value="<%= usuario != null ? usuario.getNome() : ""%>" required>
+                            <input type="text" class="form-control" id="Nome" name="Nome" value="<%= produto != null ? produto.getNome() : ""%>" required>
                         </div>
                         <div class="form-group">
-                            <label for="Email">Email:</label>
-                            <input type="email" class="form-control" id="Email" name="Email" value="<%= usuario != null ? usuario.getEmail() : ""%>" required>
+                            <label for="Descricao">Descrição:</label>
+                            <input type="text" class="form-control" id="Descricao" name="Descricao" value="<%= produto != null ? produto.getDescricao() : ""%>" required>
                         </div>
                         <div class="form-group">
-                            <label for="Senha">Senha:</label>
-                            <input type="password" class="form-control" id="Senha" name="Senha" placeholder="Deixe em branco para manter a senha atual">
+                            <label for="Preco">Preço:</label>
+                            <input type="number" step="0.01" class="form-control" id="Preco" name="Preco" value="<%= produto != null ? produto.getPreco() : ""%>" required>
                         </div>
                         <div class="form-group">
-                            <label for="Tipo">Tipo:</label>
-                            <input type="text" class="form-control" id="Tipo" name="Tipo" value="<%= usuario != null ? usuario.getTipo() : ""%>" required>
+                            <label for="Estoque">Estoque:</label>
+                            <input type="number" class="form-control" id="Estoque" name="Estoque" value="<%= produto != null ? produto.getEstoque() : ""%>" required>
                         </div>
                         <br>
                         <div class="form-group text-center">

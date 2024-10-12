@@ -88,6 +88,8 @@
 
                                     usuarioDAO.create(usuario);
                                     usuarios = usuarioDAO.getAll();
+                                    response.sendRedirect("index.jsp");
+                                    return;
                                 }
 
                                 for (Usuario usuario : usuarios) {

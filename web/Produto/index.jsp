@@ -85,7 +85,8 @@
                                     produto.setEstoque(Integer.parseInt(request.getParameter("Estoque")));
 
                                     produtoDAO.create(produto);
-                                    produtos = produtoDAO.getAll();
+                                    response.sendRedirect("index.jsp");
+                                    return;
                                 }
 
                                 for (Produto produto : produtos) {
