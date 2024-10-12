@@ -42,8 +42,8 @@
 
                 <!-- TABELA -->
                 <div class="">
-                    <table class="table table-responsive-lg table-hover table-borderless mb-0">
-                        <thead>
+                    <table class="table table-responsive-lg table-hover table-bordered mb-0" style="border: 1px solid #3a5a40;">
+                        <thead style="background-color: #3a5a40; color: white;"></thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
@@ -92,7 +92,7 @@
 
                                 for (Usuario usuario : usuarios) {
                             %>
-                            <tr>
+                            <tr style="border-bottom: 1px solid #3a5a40;"></tr>
                                 <td><%= usuario.getId() %></td>
                                 <td><%= usuario.getNome() %></td>
                                 <td><%= usuario.getEmail() %></td>

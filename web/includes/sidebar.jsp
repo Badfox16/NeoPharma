@@ -31,7 +31,7 @@
             </a>
         </li>
         <li>
-            <a href="<%= request.getContextPath() %>/Produtos/index.jsp" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #3a5a40; border: none;">
+            <a href="<%= request.getContextPath() %>/Produto/index.jsp" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #3a5a40; border: none;">
                 <strong>
                     <i class="fa-solid fa-pills mx-2"></i>
                     <span>Produtos</span>
