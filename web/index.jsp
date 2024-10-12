@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> NeoPharma 🩺💊</title>
+        <title> NeoPharma </title>
         <link rel="shortcut icon" href="<%= request.getContextPath()%>/assets/logo.png"  type="image/x-icon">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
