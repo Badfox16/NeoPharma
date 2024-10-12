@@ -22,9 +22,9 @@
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         if (usuario != null) {
             usuario.setNome(request.getParameter("Nome"));
-            usuario.setUsername(request.getParameter("Username"));
-            usuario.setApelido(request.getParameter("Apelido"));
-            usuario.setTelefone(request.getParameter("Telefone"));
+            usuario.setEmail(request.getParameter("Email"));
+            usuario.setSenha(request.getParameter("Senha"));
+            usuario.setTipo(request.getParameter("Tipo"));
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.update(usuario);
@@ -41,8 +41,8 @@
     <body>
         <section class="d-flex">
             <%@ include file="../includes/sidebar.jsp" %>
-            <div class="card-body" style="width: calc(100% - 300px); margin-left: 300px; overflow-y: scroll;">
-                <h2 class="pd-2 m-5" style="color: #1a0985;"><b>Editar Usuário</b></h2>
+            <div class="card-body" style="width: calc(100% - 290px); margin-left: 290px; overflow-y: scroll;">
+                <h2 class="pd-2 m-5" style="color: #344e41;"><b>Editar Usuário</b></h2>
 
                 <!-- Formulário de edição -->
                 <div class="m-5">
@@ -52,21 +52,21 @@
                             <input type="text" class="form-control" id="Nome" name="Nome" value="<%= usuario != null ? usuario.getNome() : ""%>" required>
                         </div>
                         <div class="form-group">
-                        <label for="Apelido">Apelido:</label>
-                        <input type="text" class="form-control" id="Apelido" name="Apelido" value="<%= usuario != null ? usuario.getApelido() : ""%>" required>
+                            <label for="Email">Email:</label>
+                            <input type="email" class="form-control" id="Email" name="Email" value="<%= usuario != null ? usuario.getEmail() : ""%>" required>
                         </div>
                         <div class="form-group">
-                            <label for="Username">Username:</label>
-                            <input type="text" class="form-control" id="Username" name="Username" value="<%= usuario != null ? usuario.getUsername() : ""%>" required>
+                            <label for="Senha">Senha:</label>
+                            <input type="password" class="form-control" id="Senha" name="Senha" placeholder="Deixe em branco para manter a senha atual">
                         </div>
                         <div class="form-group">
-                            <label for="Telefone">Telefone:</label>
-                            <input type="number" class="form-control" id="Telefone" name="Telefone" value="<%= usuario != null ? usuario.getTelefone() : ""%>" required>
+                            <label for="Tipo">Tipo:</label>
+                            <input type="text" class="form-control" id="Tipo" name="Tipo" value="<%= usuario != null ? usuario.getTipo() : ""%>" required>
                         </div>
                         <br>
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary" style="background-color:#1a0985; border:none;">
-                                <i class="fa fa-save"></i> Salvar
+                            <button type="submit" class="btn btn-primary" style="background-color:#344e41; border:none;">
+                                <i class="fa fa-save"></i> Editar
                             </button>
                         </div>
                     </form>
