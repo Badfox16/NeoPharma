@@ -43,7 +43,7 @@
     <div class="d-flex flex-column">
         <a href="<%= request.getContextPath() %>/logout" class="d-flex align-items-center text-white text-decoration-none m-2 btn" style="background-color: #3a5a40; border: none;">
             <i class="fa fa-sign-out mx-2"></i>
-            <strong>Logout</strong>
+            <strong>Sair</strong>
         </a>        
     </div>
 </div>
