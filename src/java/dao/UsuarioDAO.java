@@ -11,15 +11,14 @@ public class UsuarioDAO implements ICRUD<Usuario> {
 
     @Override
     public void create(Usuario usuario) {
-        String sql = "INSERT INTO tbUsuarios (Nome, Apelido, Telefone, Username, Senha) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tbUsuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
-            stmt.setString(2, usuario.getApelido());
-            stmt.setString(3, usuario.getTelefone());
-            stmt.setString(4, usuario.getUsername());
-            stmt.setString(5, usuario.getSenha());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setString(4, usuario.getTipo());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -30,7 +29,7 @@ public class UsuarioDAO implements ICRUD<Usuario> {
     @Override
     public Usuario read(int id) {
         Usuario usuario = null;
-        String sql = "SELECT * FROM tbUsuarios WHERE IDUser = ?";
+        String sql = "SELECT * FROM tbUsuarios WHERE id = ?";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -39,12 +38,11 @@ public class UsuarioDAO implements ICRUD<Usuario> {
 
             if (rs.next()) {
                 usuario = new Usuario();
-                usuario.setIdUser(rs.getInt("IDUser"));
-                usuario.setNome(rs.getString("Nome"));
-                usuario.setApelido(rs.getString("Apelido"));
-                usuario.setTelefone(rs.getString("Telefone"));
-                usuario.setUsername(rs.getString("Username"));
-                usuario.setSenha(rs.getString("Senha"));
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setTipo(rs.getString("tipo"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,16 +52,15 @@ public class UsuarioDAO implements ICRUD<Usuario> {
 
     @Override
     public void update(Usuario usuario) {
-        String sql = "UPDATE tbUsuarios SET Nome = ?, Apelido = ?, Telefone = ?, Username = ?, Senha = ? WHERE IDUser = ?";
+        String sql = "UPDATE tbUsuarios SET nome = ?, email = ?, senha = ?, tipo = ? WHERE id = ?";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
-            stmt.setString(2, usuario.getApelido());
-            stmt.setString(3, usuario.getTelefone());
-            stmt.setString(4, usuario.getUsername());
-            stmt.setString(5, usuario.getSenha());
-            stmt.setInt(6, usuario.getIdUser());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setString(4, usuario.getTipo());
+            stmt.setInt(5, usuario.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -73,7 +70,7 @@ public class UsuarioDAO implements ICRUD<Usuario> {
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM tbUsuarios WHERE IDUser = ?";
+        String sql = "DELETE FROM tbUsuarios WHERE id = ?";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -95,12 +92,11 @@ public class UsuarioDAO implements ICRUD<Usuario> {
 
             while (rs.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setIdUser(rs.getInt("IDUser"));
-                usuario.setNome(rs.getString("Nome"));
-                usuario.setApelido(rs.getString("Apelido"));
-                usuario.setTelefone(rs.getString("Telefone"));
-                usuario.setUsername(rs.getString("Username"));
-                usuario.setSenha(rs.getString("Senha"));
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setTipo(rs.getString("tipo"));
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {
@@ -125,12 +121,11 @@ public class UsuarioDAO implements ICRUD<Usuario> {
                 if (rs.next()) {
                     // Se encontrar o usuário, criar o objeto Usuario
                     Usuario usuario = new Usuario();
-                    usuario.setIdUser(rs.getInt("idUser"));
+                    usuario.setId(rs.getInt("id"));
                     usuario.setNome(rs.getString("nome"));
-                    usuario.setApelido(rs.getString("apelido"));
-                    usuario.setTelefone(rs.getString("telefone"));
-                    usuario.setUsername(rs.getString("username"));
-                    // usuario.setSenha(rs.getString("senha"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setSenha(rs.getString("senha"));
+                    usuario.setTipo(rs.getString("tipo"));
                     return usuario; // Login bem-sucedido
                 }
             }
