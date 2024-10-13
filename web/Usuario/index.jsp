@@ -43,8 +43,8 @@
                 <!-- TABELA -->
                 <div class="">
                     <table class="table table-responsive-lg table-hover table-bordered mb-0" style="border: 1px solid #3a5a40;">
-                        <thead style="background-color: #3a5a40; color: white;"></thead>
-                        <tr>
+                        <thead style="background-color: #3a5a40; color: white;">
+                            <tr>
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Email</th>
