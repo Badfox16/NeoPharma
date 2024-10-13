@@ -40,7 +40,9 @@
         ProdutoDAO produtoDAO = new ProdutoDAO();
 
         Venda venda = new Venda();
-        venda.setIdUsuario(1); // Substitua pelo ID do usuário logado
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+        int idUsuario = usuarioLogado.getId();
+        venda.setIdUsuario(idUsuario);
         venda.setDataVenda(java.time.LocalDateTime.now());
         venda.setTotal(carrinho.getTotal());
         vendaDAO.create(venda);
