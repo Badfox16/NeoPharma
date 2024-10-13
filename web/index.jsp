@@ -62,10 +62,11 @@
                         if (usuario != null) {
                             // Login bem-sucedido, criar sessão e redirecionar
                             session.setAttribute("usuario", usuario);
-                            response.sendRedirect("Carro/index.jsp"); // Redireciona para a página de carros
+                            response.sendRedirect("Produto/index.jsp"); // Redireciona para a página de produtos
                         } else {
                             // Login falhou, exibe mensagem de erro
                             out.println("<div class='alert alert-danger'>Login falhou. Usuário ou senha inválidos.</div>");
+                            return;
                         }
                     }
                 %>

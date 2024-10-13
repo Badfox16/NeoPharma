@@ -106,14 +106,14 @@ public class UsuarioDAO implements ICRUD<Usuario> {
     }
 
     // Método de login
-    public Usuario login(String username, String senha) {
-        String sql = "SELECT * FROM tbUsuarios WHERE username = ? AND senha = ?";
+    public Usuario login(String email, String senha) {
+        String sql = "SELECT * FROM tbUsuarios WHERE email = ? AND senha = ?";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Definir os parâmetros
-            stmt.setString(1, username);
+            stmt.setString(1, email);
             stmt.setString(2, senha);
 
             // Executar a consulta

@@ -34,9 +34,9 @@
                         </div>
                         <div class="form-group align-self-end">
                             <button type="submit" class="btn btn-primary" style="background-color:#3a5a40; border:none;">
-                            <i class="fa fa-plus-square" aria-hidden="true"></i> Cadastrar
-                        </button>
-                    </div>
+                                <i class="fa fa-plus-square" aria-hidden="true"></i> Cadastrar
+                            </button>
+                        </div>
                     </form>
                 </div>
 
@@ -44,13 +44,13 @@
                 <div class="">
                     <table class="table table-responsive-lg table-hover table-bordered mb-0" style="border: 1px solid #3a5a40;">
                         <thead style="background-color: #3a5a40; color: white;"></thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Tipo</th>
-                                <th>Ações</th>
-                            </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Tipo</th>
+                            <th>Ações</th>
+                        </tr>
                         </thead>
                         <tbody>
                             <% 
@@ -95,34 +95,35 @@
                                 for (Usuario usuario : usuarios) {
                             %>
                             <tr style="border-bottom: 1px solid #3a5a40;"></tr>
-                                <td><%= usuario.getId() %></td>
-                                <td><%= usuario.getNome() %></td>
-                                <td><%= usuario.getEmail() %></td>
-                                <td><%= usuario.getTipo() %></td>
-                                <td>
-                                    <a href="edit.jsp?idUsuario=<%= usuario.getId() %>">
-                                        <span style="font-size: 1.5rem; color:#3a5a40;" aria-hidden="true">
-                                            <i class="fa fa-user-pen"></i>
-                                        </span>
-                                    </a>  
+                        <td><%= usuario.getId() %></td>
+                        <td><%= usuario.getNome() %></td>
+                        <td><%= usuario.getEmail() %></td>
+                        <td><%= usuario.getTipo() %></td>
+                        <td>
+                            <a href="edit.jsp?idUsuario=<%= usuario.getId() %>">
+                                <span style="font-size: 1.5rem; color:#3a5a40;" aria-hidden="true">
+                                    <i class="fa fa-user-pen"></i>
+                                </span>
+                            </a>  
 
-                                    <form id="deleteForm_<%= usuario.getId() %>" method="GET" action="index.jsp" style="display: none;">
-                                        <input type="hidden" name="idUser" value="<%= usuario.getId() %>" />
-                                        <input type="hidden" name="action" value="delete" />
-                                    </form>
+                            <form id="deleteForm_<%= usuario.getId() %>" method="GET" action="index.jsp" style="display: none;">
+                                <input type="hidden" name="idUser" value="<%= usuario.getId() %>" />
+                                <input type="hidden" name="action" value="delete" />
+                            </form>
 
-                                    <a href="#" onclick="document.getElementById('deleteForm_<%= usuario.getId() %>').submit(); return false;" class="deleteButton">
-                                        <span style="font-size: 1.5rem; color:#3a5a40; padding-left: 16px;" aria-hidden="true">
-                                            <i class="fa fa-trash"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <% } %>
+                            <a href="#" onclick="document.getElementById('deleteForm_<%= usuario.getId() %>').submit(); return false;" class="deleteButton">
+                                <span style="font-size: 1.5rem; color:#3a5a40; padding-left: 16px;" aria-hidden="true">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </a>
+                        </td>
+                        </tr>
+                        <% } %>
                         </tbody>
                     </table>
                 </div>
-                            </div>
+            </div>
         </section>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
