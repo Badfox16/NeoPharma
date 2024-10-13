@@ -8,18 +8,22 @@ public class ItemVenda {
     private int idProduto;
     private int quantidade;
     private BigDecimal precoUnitario;
+    private String nomeProduto;
+    private String descricaoProduto;
 
     // Construtor vazio
     public ItemVenda() {
     }
 
     // Construtor com parâmetros
-    public ItemVenda(int id, int idVenda, int idProduto, int quantidade, BigDecimal precoUnitario) {
+    public ItemVenda(int id, int idVenda, int idProduto, int quantidade, BigDecimal precoUnitario, String nomeProduto, String descricaoProduto) {
         this.id = id;
         this.idVenda = idVenda;
         this.idProduto = idProduto;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
+        this.nomeProduto = nomeProduto;
+        this.descricaoProduto = descricaoProduto;
     }
 
     // Getters e Setters
@@ -61,5 +65,21 @@ public class ItemVenda {
 
     public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public String getDescricaoProduto() {
+        return descricaoProduto;
+    }
+
+    public void setDescricaoProduto(String descricaoProduto) {
+        this.descricaoProduto = descricaoProduto;
     }
 }

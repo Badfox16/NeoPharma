@@ -104,4 +104,27 @@ public class ProdutoDAO implements ICRUD<Produto> {
         }
         return produtos;
     }
+
+    public List<Produto> getAllEmStock() {
+        List<Produto> produtos = new ArrayList<>();
+        String sql = "SELECT * FROM tbProdutos WHERE estoque > 0";
+
+        try (Connection conn = ConexaoMySQL.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setId(rs.getInt("id"));
+                produto.setNome(rs.getString("nome"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setPreco(rs.getDouble("preco"));
+                produto.setEstoque(rs.getInt("estoque"));
+                produtos.add(produto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produtos;
+    }
 }

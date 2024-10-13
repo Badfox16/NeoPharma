@@ -18,18 +18,33 @@
             <a href="<%= request.getContextPath() %>/Vendas/index.jsp" class="nav-link my-4 text-white btn d-flex align-items-center" style="background-color: #3a5a40; border: none;">
                 <strong>
                 <i class="fa-solid fa-shopping-cart mx-2"></i>
-                <span>Vendas</span>
+                <span>Faturação</span>
                 </strong>
             </a>
         </li>
         <li>
-            <a href="<%= request.getContextPath() %>/Usuario/index.jsp" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #3a5a40; border: none;">
+            <a href="<%= request.getContextPath() %>/Vendas/ver.jsp" class="nav-link mb-4 text-white btn d-flex align-items-center" style="background-color: #3a5a40; border: none;">
                 <strong>
-                    <i class="fa-solid fa-user mx-2"></i>
-                    <span>Usuários</span>
+                <i class="fa-solid fa-print mx-2"></i>
+                <span>Ver Vendas</span>
                 </strong>
             </a>
         </li>
+        <% 
+            
+            if (usuarioLogado != null && "admin".equals(usuarioLogado.getTipo())) { 
+        %>
+                <li>
+                    <a href="<%= request.getContextPath() %>/Usuario/index.jsp" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #3a5a40; border: none;">
+                        <strong>
+                            <i class="fa-solid fa-user mx-2"></i>
+                            <span>Usuários</span>
+                        </strong>
+                    </a>
+                </li>
+        <% 
+            } 
+        %>
         <li>
             <a href="<%= request.getContextPath() %>/Produto/index.jsp" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #3a5a40; border: none;">
                 <strong>

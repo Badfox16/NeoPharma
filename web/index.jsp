@@ -62,7 +62,13 @@
                         if (usuario != null) {
                             // Login bem-sucedido, criar sessão e redirecionar
                             session.setAttribute("usuario", usuario);
-                            response.sendRedirect("Produto/index.jsp"); // Redireciona para a página de produtos
+                            if ("admin".equalsIgnoreCase(usuario.getTipo())) {
+                                // Redireciona para a página de admin
+                                response.sendRedirect("Usuario/index.jsp");
+                            } else {
+                                // Redireciona para a página de usuário
+                                response.sendRedirect("Produto/index.jsp");
+                            }
                         } else {
                             // Login falhou, exibe mensagem de erro
                             out.println("<div class='alert alert-danger'>Login falhou. Usuário ou senha inválidos.</div>");

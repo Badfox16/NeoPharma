@@ -45,15 +45,9 @@
         venda.setTotal(carrinho.getTotal());
         vendaDAO.create(venda);
 
-        // Verificar se a venda foi criada corretamente
-        out.println("Venda criada com ID: " + venda.getId());
-
         for (ItemVenda item : carrinho.getItens()) {
             item.setIdVenda(venda.getId());
             itemVendaDAO.create(item);
-
-            // Verificar se o item foi criado corretamente
-            out.println("Item criado com ID da venda: " + item.getIdVenda() + ", ID do produto: " + item.getIdProduto());
 
             // Atualizar o estoque do produto
             Produto produto = produtoDAO.read(item.getIdProduto());
@@ -64,6 +58,8 @@
         // Limpar o carrinho após finalizar a venda
         carrinho = new Carrinho();
         session.setAttribute("carrinho", carrinho);
+
+        response.sendRedirect("ver.jsp");
     }
 %>
 
@@ -82,9 +78,10 @@
                         <div class="form-group me-3">
                             <label for="Produto">Produto:</label>
                             <select class="form-control" id="Produto" name="Produto" required>
+                                <option value="" disabled selected>Selecione um produto</option>
                                 <%
                                     ProdutoDAO produtoDAO = new ProdutoDAO();
-                                    List<Produto> produtos = produtoDAO.getAll();
+                                    List<Produto> produtos = produtoDAO.getAllEmStock();
                                     for (Produto produto : produtos) {
                                 %>
                                 <option value="<%= produto.getId()%>"><%= produto.getNome()%> - <%=produto.getDescricao()%></option>
@@ -138,45 +135,16 @@
                     <div class="mt-3">
                         <h4>Total: <%= carrinho.getTotal() %></h4>
                     </div>
-                    <form method="post">
-                        <input type="hidden" name="action" value="finalize">
-                        <button type="submit" class="btn btn-success">Finalizar Venda</button>
-                    </form>
-                </div>
-
-                <!-- TABELA DE VENDAS -->
-                <div class="">
-                    <h3 class="m-5" style="color: #344e41;"><b>Vendas Realizadas</b></h3>
-                    <table class="table table-responsive-lg table-hover table-bordered mb-0" style="border: 1px solid #3a5a40;">
-                        <thead style="background-color: #3a5a40; color: white;">
-                            <tr>
-                                <th>ID</th>
-                                <th>Data</th>
-                                <th>Total</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                VendaDAO vendaDAO = new VendaDAO();
-                                List<Venda> vendas = vendaDAO.getAll();
-                                for (Venda venda : vendas) {
-                            %>
-                            <tr>
-                                <td><%= venda.getId()%></td>
-                                <td><%= venda.getDataVenda()%></td>
-                                <td><%= venda.getTotal()%></td>
-                                <td>
-                                    <a href="detalhes.jsp?idVenda=<%= venda.getId()%>">
-                                        <span style="font-size: 1.5rem; color:#3a5a40;" aria-hidden="true">
-                                            <i class="fa fa-eye"></i>
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <% }%>
-                        </tbody>
-                    </table>
+                    <div class="d-flex flex-wrap">
+                        <form method="post">
+                            <input type="hidden" name="action" value="finalize">
+                            <button type="submit" class="btn btn-success">Finalizar Venda</button>
+                        </form>
+                        <!-- Botão para redirecionar para ver.jsp -->
+                        <form action="ver.jsp" method="get" style="margin-left: 10px;">
+                            <button type="submit" class="btn btn-sucess" style=" background-color:#344e41; color: white;">Ver Vendas</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

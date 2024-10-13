@@ -50,6 +50,33 @@ public class ItemVendaDAO implements ICRUD<ItemVenda> {
         return itemVenda;
     }
 
+    public List<ItemVenda> getByVendaId(int id) {
+        List<ItemVenda> itensVenda = new ArrayList<>();
+        String sql = "SELECT iv.*, p.nome, p.descricao FROM tbItensVenda iv JOIN tbProdutos p ON iv.id_produto = p.id WHERE iv.id_venda = ?";
+
+        try (Connection conn = ConexaoMySQL.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ItemVenda itemVenda = new ItemVenda();
+                itemVenda.setId(rs.getInt("id"));
+                itemVenda.setIdVenda(rs.getInt("id_venda"));
+                itemVenda.setIdProduto(rs.getInt("id_produto"));
+                itemVenda.setQuantidade(rs.getInt("quantidade"));
+                itemVenda.setPrecoUnitario(rs.getBigDecimal("preco_unitario"));
+                itemVenda.setNomeProduto(rs.getString("nome"));
+                itemVenda.setDescricaoProduto(rs.getString("descricao"));
+                itensVenda.add(itemVenda);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return itensVenda;
+    }
+
     @Override
     public void update(ItemVenda itemVenda) {
         String sql = "UPDATE tbItensVenda SET id_venda = ?, id_produto = ?, quantidade = ?, preco_unitario = ? WHERE id = ?";
@@ -84,7 +111,7 @@ public class ItemVendaDAO implements ICRUD<ItemVenda> {
     @Override
     public List<ItemVenda> getAll() {
         List<ItemVenda> itensVenda = new ArrayList<>();
-        String sql = "SELECT * FROM tbItensVenda";
+        String sql = "SELECT * FROM tbItensVenda ORDER BY id DESC";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 Statement stmt = conn.createStatement();
