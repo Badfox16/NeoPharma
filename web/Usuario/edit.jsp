@@ -23,7 +23,10 @@
         if (usuario != null) {
             usuario.setNome(request.getParameter("Nome"));
             usuario.setEmail(request.getParameter("Email"));
-            usuario.setSenha(request.getParameter("Senha"));
+            String novaSenha = request.getParameter("Senha");
+            if (novaSenha != null && !novaSenha.isEmpty()) {
+                usuario.setSenha(novaSenha);
+            }
             usuario.setTipo(request.getParameter("Tipo"));
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();

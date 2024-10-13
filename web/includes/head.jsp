@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="model.Usuario" %>
 <head>
-    <title>NeoPharm - FarmÃ¡cia</title>
+    <title>NeoPharma - Farmácia</title>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="<%= request.getContextPath() %>/assets/logo.png"  type="image/x-icon">
     <script src="https://kit.fontawesome.com/8e04a845a7.js" crossorigin="anonymous"></script>
