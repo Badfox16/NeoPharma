@@ -14,12 +14,19 @@ public class VendaDAO implements ICRUD<Venda> {
         String sql = "INSERT INTO tbVendas (id_usuario, data_venda, total) VALUES (?, ?, ?)";
 
         try (Connection conn = ConexaoMySQL.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, venda.getIdUsuario());
             stmt.setTimestamp(2, Timestamp.valueOf(venda.getDataVenda()));
             stmt.setBigDecimal(3, venda.getTotal());
 
             stmt.executeUpdate();
+
+            // Obter o ID da venda recém-criada
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    venda.setId(generatedKeys.getInt(1));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
