@@ -51,7 +51,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%                                FarmacoDAO FarmacoDAO = new FarmacoDAO();
+                            <%                                
+                                FarmacoDAO FarmacoDAO = new FarmacoDAO();
                                 List<Farmaco> Farmacos = null;
 
                                 String pesquisa = request.getParameter("Farmaco");
