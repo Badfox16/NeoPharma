@@ -9,10 +9,10 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {
-                background-color: #f8f9fa; /* Cor de fundo clara para a página */
+                background-color: #343a40; /* Cor de fundo escura para a página */
             }
             .login-container {
-                background-color: #ffffff;
+                background-color: #212529;
                 border-radius: 10px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 padding: 40px;
@@ -21,20 +21,31 @@
                 width: 100%;
             }
             .login-title {
-                color: #28a745; /* Cor verde do título */
+                color: #ffffff; /* Cor branca do título */
                 font-weight: bold;
                 text-align: center;
                 margin-bottom: 20px;
             }
             .form-label {
-                color: #495057; /* Cor cinza para os labels */
+                color: #ced4da; /* Cor cinza claro para os labels */
+            }
+            .form-control {
+                background-color: #495057; /* Fundo escuro para os campos de entrada */
+                color: #ffffff; /* Texto branco nos campos de entrada */
+                border: none;
+            }
+            .form-control:focus {
+                background-color: #495057;
+                color: #ffffff;
+                border-color: #6c757d;
+                box-shadow: none;
             }
             .btn-primary {
-                background-color: #28a745; /* Botão verde */
+                background-color: #6c757d; /* Botão cinza */
                 border: none;
             }
             .btn-primary:hover {
-                background-color: #218838; /* Botão verde escuro no hover */
+                background-color: #5a6268; /* Botão cinza escuro no hover */
             }
             .alert-danger {
                 background-color: #f8d7da;
@@ -67,7 +78,7 @@
                                 response.sendRedirect("Usuario/index.jsp");
                             } else {
                                 // Redireciona para a página de usuário
-                                response.sendRedirect("Produto/index.jsp");
+                                response.sendRedirect("Farmacos/index.jsp");
                             }
                         } else {
                             // Login falhou, exibe mensagem de erro

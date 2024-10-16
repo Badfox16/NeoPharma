@@ -4,8 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.Usuario;
-import service.ICRUD;
 import conexao.ConexaoMySQL;
+import service.ICRUD;
 
 public class UsuarioDAO implements ICRUD<Usuario> {
 
