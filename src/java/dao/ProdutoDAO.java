@@ -3,15 +3,15 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import model.Produto;
+import model.Farmaco;
 import service.ICRUD;
 import conexao.ConexaoMySQL;
 
-public class ProdutoDAO implements ICRUD<Produto> {
+public class ProdutoDAO implements ICRUD<Farmaco> {
 
     @Override
-    public void create(Produto produto) {
-        String sql = "INSERT INTO tbProdutos (nome, descricao, preco, estoque) VALUES (?, ?, ?, ?)";
+    public void create(Farmaco produto) {
+        String sql = "INSERT INTO tbFarmacos (nome, descricao, preco, estoque, dosagem, id_tipo) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -19,6 +19,8 @@ public class ProdutoDAO implements ICRUD<Produto> {
             stmt.setString(2, produto.getDescricao());
             stmt.setDouble(3, produto.getPreco());
             stmt.setInt(4, produto.getEstoque());
+            stmt.setString(5, produto.getDosagem());
+            stmt.setString(6, produto.getIdTipo());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -27,9 +29,9 @@ public class ProdutoDAO implements ICRUD<Produto> {
     }
 
     @Override
-    public Produto read(int id) {
-        Produto produto = null;
-        String sql = "SELECT * FROM tbProdutos WHERE id = ?";
+    public Farmaco read(int id) {
+        Farmaco produto = null;
+        String sql = "SELECT * FROM tbFarmacos WHERE id = ?";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -37,12 +39,14 @@ public class ProdutoDAO implements ICRUD<Produto> {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                produto = new Produto();
+                produto = new Farmaco();
                 produto.setId(rs.getInt("id"));
                 produto.setNome(rs.getString("nome"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getDouble("preco"));
                 produto.setEstoque(rs.getInt("estoque"));
+                produto.setDosagem(rs.getString("dosagem"));
+                produto.setIdTipo(rs.getString("id_tipo"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,8 +55,8 @@ public class ProdutoDAO implements ICRUD<Produto> {
     }
 
     @Override
-    public void update(Produto produto) {
-        String sql = "UPDATE tbProdutos SET nome = ?, descricao = ?, preco = ?, estoque = ? WHERE id = ?";
+    public void update(Farmaco produto) {
+        String sql = "UPDATE tbFarmacos SET nome = ?, descricao = ?, preco = ?, estoque = ?, dosagem = ?, id_tipo = ? WHERE id = ?";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -60,7 +64,9 @@ public class ProdutoDAO implements ICRUD<Produto> {
             stmt.setString(2, produto.getDescricao());
             stmt.setDouble(3, produto.getPreco());
             stmt.setInt(4, produto.getEstoque());
-            stmt.setInt(5, produto.getId());
+            stmt.setString(5, produto.getDosagem());
+            stmt.setString(6, produto.getIdTipo());
+            stmt.setInt(7, produto.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -70,7 +76,7 @@ public class ProdutoDAO implements ICRUD<Produto> {
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM tbProdutos WHERE id = ?";
+        String sql = "DELETE FROM tbFarmacos WHERE id = ?";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -82,49 +88,53 @@ public class ProdutoDAO implements ICRUD<Produto> {
     }
 
     @Override
-    public List<Produto> getAll() {
-        List<Produto> produtos = new ArrayList<>();
-        String sql = "SELECT * FROM tbProdutos";
+    public List<Farmaco> getAll() {
+        List<Farmaco> Farmacos = new ArrayList<>();
+        String sql = "SELECT * FROM tbFarmacos";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Produto produto = new Produto();
+                Farmaco produto = new Farmaco();
                 produto.setId(rs.getInt("id"));
                 produto.setNome(rs.getString("nome"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getDouble("preco"));
                 produto.setEstoque(rs.getInt("estoque"));
-                produtos.add(produto);
+                produto.setDosagem(rs.getString("dosagem"));
+                produto.setIdTipo(rs.getString("id_tipo"));
+                Farmacos.add(produto);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return produtos;
+        return Farmacos;
     }
 
-    public List<Produto> getAllEmStock() {
-        List<Produto> produtos = new ArrayList<>();
-        String sql = "SELECT * FROM tbProdutos WHERE estoque > 0";
+    public List<Farmaco> getAllEmStock() {
+        List<Farmaco> Farmacos = new ArrayList<>();
+        String sql = "SELECT * FROM tbFarmacos WHERE estoque > 0";
 
         try (Connection conn = ConexaoMySQL.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Produto produto = new Produto();
+                Farmaco produto = new Farmaco();
                 produto.setId(rs.getInt("id"));
                 produto.setNome(rs.getString("nome"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getDouble("preco"));
                 produto.setEstoque(rs.getInt("estoque"));
-                produtos.add(produto);
+                produto.setDosagem(rs.getString("dosagem"));
+                produto.setIdTipo(rs.getString("id_tipo"));
+                Farmacos.add(produto);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return produtos;
+        return Farmacos;
     }
 }

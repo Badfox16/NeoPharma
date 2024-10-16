@@ -1,23 +1,27 @@
 package model;
 
-public class Produto {
+public class Farmaco {
     private int id;
     private String nome;
     private String descricao;
     private double preco;
     private int estoque;
+    private String dosagem;
+    private String idTipo;
 
     // Constructor
-    public Produto(int id, String nome, String descricao, double preco, int estoque) {
+    public Farmaco(int id, String nome, String descricao, double preco, int estoque, String dosagem, String idTipo) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.estoque = estoque;
+        this.dosagem = dosagem;
+        this.idTipo = idTipo;
     }
 
     // Empty Constructor
-    public Produto() {
+    public Farmaco() {
     }
 
     // Getters and Setters
@@ -59,5 +63,21 @@ public class Produto {
 
     public void setEstoque(int estoque) {
         this.estoque = estoque;
+    }
+
+    public String getDosagem() {
+        return dosagem;
+    }
+
+    public void setDosagem(String dosagem) {
+        this.dosagem = dosagem;
+    }
+
+    public String getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(String idTipo) {
+        this.idTipo = idTipo;
     }
 }

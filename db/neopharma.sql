@@ -13,13 +13,22 @@ CREATE TABLE tbUsuarios (
     tipo ENUM('usuario', 'admin') NOT NULL
 );
 
--- Criação da tabela de produtos
-CREATE TABLE tbProdutos (
+-- Criação da tabela de tipos de farmacos
+CREATE TABLE tbTipos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo VARCHAR(50) NOT NULL
+);
+
+-- Criação da tabela de farmacos
+CREATE TABLE tbFarmacos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT,
     preco DECIMAL(10, 2) NOT NULL,
-    estoque INT NOT NULL
+    estoque INT NOT NULL,
+    dosagem VARCHAR(50) NOT NULL,
+    id_tipo INT NOT NULL,
+    FOREIGN KEY (id_tipo) REFERENCES tbTipos(id)
 );
 
 -- Criação da tabela de vendas
