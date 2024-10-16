@@ -7,7 +7,7 @@ import model.Farmaco;
 import service.ICRUD;
 import conexao.ConexaoMySQL;
 
-public class ProdutoDAO implements ICRUD<Farmaco> {
+public class FarmacoDAO implements ICRUD<Farmaco> {
 
     @Override
     public void create(Farmaco produto) {
